@@ -28,10 +28,8 @@ else
    echo "When you need to join other nixel/rancher-percona-xtradb-cluster containers to this PXC, you will need the following ENVIRONMENT VARIABLES:"
    echo "PXC_NODES=${PXC_NODES}"
    echo "PXC_SST_PASSWORD=${PXC_SST_PASSWORD}"
-   echo "==========================================="
-   if [ ! -z ${PXC_ROOT_PASSWORD} ]; then
-      echo "Root password is: ${PXC_ROOT_PASSWORD}"
-      echo "===========================================" 
+   echo "PXC_ROOT_PASSWORD=${PXC_ROOT_PASSWORD}"
+   echo "===========================================" 
    fi
    echo "=> Starting PXC Cluster"
    /usr/bin/supervisord
