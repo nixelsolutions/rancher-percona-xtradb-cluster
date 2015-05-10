@@ -9,11 +9,14 @@ RUN echo "deb-src http://repo.percona.com/apt trusty main" >> /etc/apt/sources.l
 
 RUN apt-key adv --keyserver keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A
 RUN apt-get update && \
-    apt-get -y install percona-xtradb-cluster-56 pwgen supervisor
+    apt-get -y install percona-xtradb-cluster-56 pwgen supervisor openssh-server
 
-RUN mkdir -p /var/log/supervisor
+RUN mkdir -p /var/log/supervisor /var/run/sshd
+RUN perl -p -i -e "s/#?PasswordAuthentication .*/PasswordAuthentication yes/g" /etc/ssh/sshd_config
+RUN perl -p -i -e "s/#?PermitRootLogin .*/PermitRootLogin yes/g" /etc/ssh/sshd_config
+RUN grep ClientAliveInterval /etc/ssh/sshd_config >/dev/null 2>&1 || echo "ClientAliveInterval 60" >> /etc/ssh/sshd_config
 
-ENV PXC_MULTICAST_ADDRESS **ChangeMe**
+ENV PXC_NODES **ChangeMe**
 ENV PXC_BOOTSTRAP **ChangeMe**
 ENV PXC_SST_PASSWORD **ChangeMe**
 ENV PXC_ROOT_PASSWORD **ChangeMe**

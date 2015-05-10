@@ -2,8 +2,7 @@
 wsrep_provider=/usr/lib/libgalera_smm.so
 
 # Cluster connection URL contains the IPs of node#1, node#2 and node#3
-wsrep_cluster_address = gcomm://PXC_MULTICAST_ADDRESS
-wsrep_provider_options = "gmcast.mcast_addr=PXC_MULTICAST_ADDRESS"
+wsrep_cluster_address = gcomm://
 
 # In order for Galera to work correctly binlog format should be ROW
 binlog_format=ROW
