@@ -9,7 +9,7 @@ RUN echo "deb-src http://repo.percona.com/apt trusty main" >> /etc/apt/sources.l
 
 RUN apt-key adv --keyserver keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A
 RUN apt-get update && \
-    apt-get -y install percona-xtradb-cluster-56 pwgen supervisor openssh-server
+    apt-get -y install percona-xtradb-cluster-56 pwgen supervisor openssh-server sshpass
 
 RUN mkdir -p /var/log/supervisor /var/run/sshd
 RUN perl -p -i -e "s/#?PasswordAuthentication .*/PasswordAuthentication yes/g" /etc/ssh/sshd_config
