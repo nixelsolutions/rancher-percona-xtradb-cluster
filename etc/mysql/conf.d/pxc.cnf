@@ -1,0 +1,26 @@
+[mysqld]
+wsrep_provider=/usr/lib/libgalera_smm.so
+
+# Cluster connection URL contains the IPs of node#1, node#2 and node#3
+wsrep_cluster_address = gcomm://PXC_MULTICAST_ADDRESS
+
+# In order for Galera to work correctly binlog format should be ROW
+binlog_format=ROW
+
+# MyISAM storage engine has only experimental support
+default_storage_engine=InnoDB
+
+# This changes how InnoDB autoincrement locks are managed and is a requirement for Galera
+innodb_autoinc_lock_mode=2
+
+# Node #1 address
+wsrep_node_address=MY_RANCHER_IP
+
+# SST method
+wsrep_sst_method=xtrabackup-v2
+
+# Cluster name
+wsrep_cluster_name=pxc_rancher
+
+# Authentication for SST method
+wsrep_sst_auth="sstuser:PXC_SST_PASSWORD"
