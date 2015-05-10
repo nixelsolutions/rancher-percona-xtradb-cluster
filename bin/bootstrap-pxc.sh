@@ -15,6 +15,7 @@ fi
 echo "=> Configuring PXC cluster"
 echo "root:${PXC_ROOT_PASSWORD}" | chpasswd
 MY_RANCHER_IP=`echo ${RANCHER_IP} | awk -F\/ '{print $1}'`
+change_pxc_nodes.sh ${MY_RANCHER_IP}
 perl -p -i -e "s/PXC_SST_PASSWORD/${PXC_SST_PASSWORD}/g" ${PXC_CONF}
 perl -p -i -e "s/MY_RANCHER_IP/${MY_RANCHER_IP}/g" ${PXC_CONF}
 echo "PXC_SST_PASSWORD=${PXC_SST_PASSWORD}" >> ${PXC_CONF_FLAG}

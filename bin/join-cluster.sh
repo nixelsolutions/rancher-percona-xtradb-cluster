@@ -16,6 +16,12 @@ fi
 echo "=> Configuring PXC cluster"
 echo "root:${PXC_ROOT_PASSWORD}" | chpasswd
 MY_RANCHER_IP=`echo ${RANCHER_IP} | awk -F\/ '{print $1}'`
+for node in `echo ${PXC_NODES} | sed "s/,/ /g`; do
+   echo "=> Updating PXC cluster to add my IP to the cluster"
+   echo "=> Trying to update configuration on node $node ..."
+   sshpass -p ${PXC_ROOT_PASSWORD} ssh ${SSH_OPTS} root@$node "change_pxc_nodes.sh \"${PXC_NODES},${MY_RANCHER_IP}\""
+done
+change_pxc_nodes.sh "${PXC_NODES},${MY_RANCHER_IP}"
 perl -p -i -e "s/PXC_SST_PASSWORD/$PXC_SST_PASSWORD/g" ${PXC_CONF}
 perl -p -i -e "s/MY_RANCHER_IP/$MY_RANCHER_IP/g" ${PXC_CONF}
 echo "PXC_NODES=${PXC_NODES}" > ${PXC_CONF_FLAG}
