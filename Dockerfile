@@ -25,7 +25,7 @@ ENV CREATE_DATABASES **ChangeMe**
 ENV PXC_VOLUME /var/lib/mysql
 ENV PXC_CONF /etc/mysql/conf.d/pxc.cnf
 ENV PXC_CONF_FLAG /etc/pxc.configured
-ENV SSH_OPTS -p 2222 -o ConnectTimeout=4 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
+ENV SSH_OPTS -p 22 -o ConnectTimeout=4 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
 
 VOLUME ["${PXC_VOLUME}"]
 
