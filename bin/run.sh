@@ -9,6 +9,9 @@ if [ "${PXC_BOOTSTRAP}" == "**ChangeMe**" ]; then
    exit 1
 fi
 
+# Add required route for multicast traffic
+route add -net 224.0.0.0 netmask 240.0.0.0 dev eth0
+
 # If this container is not configured, just configure it
 if [ ! -e ${PXC_CONF_FLAG} ]; then
    # Bootstrap the cluster - Needed for first container initialization
