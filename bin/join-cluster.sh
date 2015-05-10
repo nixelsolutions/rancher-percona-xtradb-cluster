@@ -24,7 +24,7 @@ done
 change_pxc_nodes.sh "${PXC_NODES},${MY_RANCHER_IP}"
 perl -p -i -e "s/PXC_SST_PASSWORD/$PXC_SST_PASSWORD/g" ${PXC_CONF}
 perl -p -i -e "s/MY_RANCHER_IP/$MY_RANCHER_IP/g" ${PXC_CONF}
-echo "PXC_NODES=${PXC_NODES}" > ${PXC_CONF_FLAG}
+echo "PXC_NODES=${PXC_NODES},${MY_RANCHER_IP}" > ${PXC_CONF_FLAG}
 echo "PXC_SST_PASSWORD=${PXC_SST_PASSWORD}" >> ${PXC_CONF_FLAG}
 chmod 600 ${PXC_CONF_FLAG}
 chown -R mysql:mysql ${PXC_VOLUME}

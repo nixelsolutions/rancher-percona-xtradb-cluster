@@ -26,7 +26,7 @@ chown -R mysql:mysql ${PXC_VOLUME}
 
 echo "==========================================="
 echo "When you need to join other nixel/rancher-percona-xtradb-cluster containers to this PXC, you will need the following ENVIRONMENT VARIABLES:"
-echo "PXC_NODES=${PXC_NODES}"
+echo "PXC_NODES=${MY_RANCHER_IP}"
 echo "PXC_SST_PASSWORD=${PXC_SST_PASSWORD}"
 echo
 echo "==========================================="
