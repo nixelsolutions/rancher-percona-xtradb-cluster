@@ -2,6 +2,9 @@
 
 set -e
 
+PXC_CONF=/etc/mysql/conf.d/pxc.cnf
+PXC_CONF_FLAG=/etc/pxc.configured
+
 [ "$DEBUG" == "1" ] && set -x && set +e
 
 PXC_NODES=$1
