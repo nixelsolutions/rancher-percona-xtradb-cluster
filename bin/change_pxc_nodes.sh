@@ -2,6 +2,8 @@
 
 set -e
 
+[ "$DEBUG" == "1" ] && set -x && set +e
+
 PXC_NODES=$1
 if [ "${PXC_NODES}" == "**ChangeMe**" ] || [ -z ${PXC_NODES} ]; then
    echo "ERROR: You did not specify nodes to join PXC cluster, please enter PXC nodes as an argument."
@@ -10,4 +12,5 @@ if [ "${PXC_NODES}" == "**ChangeMe**" ] || [ -z ${PXC_NODES} ]; then
    exit 1
 fi
 
-perl -p -i -e "s/wsrep_cluster_address = gcomm:\/\//wsrep_cluster_address = gcomm:\/\/$PXC_NODES" ${PXC_CONF}
+perl -p -i -e "s/wsrep_cluster_address = gcomm:\/\//wsrep_cluster_address = gcomm:\/\/$PXC_NODES/g" ${PXC_CONF}
+perl -p -i -e "s/PXC_NODES=.*/PXC_NODES=${PXC_NODES}/g" ${PXC_CONF_FLAG}
