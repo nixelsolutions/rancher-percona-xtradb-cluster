@@ -1,8 +1,9 @@
 [mysqld]
+bind-address =0.0.0.0
 wsrep_provider=/usr/lib/libgalera_smm.so
 
 # Cluster connection URL contains the IPs of node#1, node#2 and node#3
-wsrep_cluster_address = gcomm://
+wsrep_cluster_address=gcomm://
 
 # In order for Galera to work correctly binlog format should be ROW
 binlog_format=ROW
