@@ -37,7 +37,7 @@ if [ `echo "${PXC_BOOTSTRAP}" | tr '[:lower:]' '[:upper:]'` == "YES" ]; then
    echo "=> Bootstrapping PXC cluster"
    mysql_install_db --datadir=${PXC_VOLUME} >/dev/null 2>&1
    echo "CREATE USER 'root'@'%' IDENTIFIED BY '${PXC_ROOT_PASSWORD}';" > /tmp/init.sql
-   echo "GRANT ALL ON *.* TO 'root'@'%';" >> /tmp/init.sql
+   echo "GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION;" >> /tmp/init.sql
    echo "UPDATE mysql.user set Password=PASSWORD('${PXC_ROOT_PASSWORD}') where user='root';" >> /tmp/init.sql
    echo "DELETE FROM mysql.user WHERE User='';" >> /tmp/init.sql
    echo "DROP DATABASE test;" >> /tmp/init.sql
