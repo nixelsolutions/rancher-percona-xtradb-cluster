@@ -15,7 +15,7 @@ if [ "${PXC_NODES}" == "**ChangeMe**" ] || [ -z "${PXC_NODES}" ]; then
    exit 1
 fi
 
-perl -p -i -e "s/wsrep_cluster_address = gcomm:\/\/.*/wsrep_cluster_address = gcomm:\/\/$PXC_NODES/g" ${PXC_CONF}
+perl -p -i -e "s/wsrep_cluster_address\s*=\s*gcomm:\/\/.*/wsrep_cluster_address = gcomm:\/\/$PXC_NODES/g" ${PXC_CONF}
 if [ -e ${PXC_CONF_FLAG} ]; then
    perl -p -i -e "s/PXC_NODES=.*/PXC_NODES=${PXC_NODES}/g" ${PXC_CONF_FLAG}
 fi

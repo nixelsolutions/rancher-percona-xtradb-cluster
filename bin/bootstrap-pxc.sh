@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+set +H
 
 [ "$DEBUG" == "1" ] && set -x && set +e
 
@@ -14,7 +15,8 @@ fi
 
 echo "=> Configuring PXC cluster"
 echo "root:${PXC_ROOT_PASSWORD}" | chpasswd
-MY_RANCHER_IP=`echo ${RANCHER_IP} | awk -F\/ '{print $1}'`
+sleep 2
+MY_RANCHER_IP=`ip addr | grep inet | grep 10.42 | tail -1 | awk '{print $2}' | awk -F\/ '{print $1}'`
 change_pxc_nodes.sh "${MY_RANCHER_IP}"
 perl -p -i -e "s/PXC_SST_PASSWORD/${PXC_SST_PASSWORD}/g" ${PXC_CONF}
 perl -p -i -e "s/MY_RANCHER_IP/${MY_RANCHER_IP}/g" ${PXC_CONF}
@@ -44,6 +46,7 @@ if [ `echo "${PXC_BOOTSTRAP}" | tr '[:lower:]' '[:upper:]'` == "YES" ]; then
    echo "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';" >> /tmp/init.sql
    echo "CREATE USER 'sstuser'@'%' IDENTIFIED BY '${PXC_SST_PASSWORD}';" >> /tmp/init.sql
    echo "GRANT RELOAD, LOCK TABLES, REPLICATION CLIENT ON *.* TO 'sstuser'@'%';" >> /tmp/init.sql
+   echo "GRANT PROCESS ON *.* TO 'clustercheckuser'@'localhost' IDENTIFIED BY 'clustercheckpassword!';" >> /tmp/init.sql
    echo "FLUSH PRIVILEGES;" >> /tmp/init.sql
    /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord_bootstrap.conf
 fi
