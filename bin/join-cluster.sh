@@ -13,6 +13,8 @@ if [ "${PXC_SST_PASSWORD}" == "**ChangeMe**" ]; then
    exit 1
 fi
 
+PXC_NODES=`echo ${PXC_NODES} | sed "s/ //g"`
+
 echo "=> Configuring PXC cluster"
 echo "root:${PXC_ROOT_PASSWORD}" | chpasswd
 sleep 2
@@ -25,7 +27,7 @@ done
 change_pxc_nodes.sh "${PXC_NODES},${MY_RANCHER_IP}"
 perl -p -i -e "s/PXC_SST_PASSWORD/$PXC_SST_PASSWORD/g" ${PXC_CONF}
 perl -p -i -e "s/MY_RANCHER_IP/$MY_RANCHER_IP/g" ${PXC_CONF}
-echo "PXC_NODES=${PXC_NODES},${MY_RANCHER_IP}" > ${PXC_CONF_FLAG}
+echo "PXC_NODES=\"${PXC_NODES},${MY_RANCHER_IP}\"" > ${PXC_CONF_FLAG}
 echo "PXC_SST_PASSWORD=${PXC_SST_PASSWORD}" >> ${PXC_CONF_FLAG}
 echo "PXC_ROOT_PASSWORD=${PXC_ROOT_PASSWORD}" >> ${PXC_CONF_FLAG}
 chmod 600 ${PXC_CONF_FLAG}
