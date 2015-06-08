@@ -7,6 +7,7 @@ set -e
 if [ "${PXC_SST_PASSWORD}" == "**ChangeMe**" -o -z "${PXC_SST_PASSWORD}" ]; then
    echo "*** ERROR: you need to define PXC_SST_PASSWORD environment variable - Exiting ..."
    exit 1
+fi
 
 if [ "${PXC_ROOT_PASSWORD}" == "**ChangeMe**" -o -z "${ROOT_PASSWORD}" ]; then
    echo "*** ERROR: you need to define PXC_ROOT_PASSWORD environment variable - Exiting ..."
