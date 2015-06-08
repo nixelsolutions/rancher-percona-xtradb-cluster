@@ -13,7 +13,7 @@ RUN apt-get update && \
 
 ENV PXC_SST_PASSWORD **ChangeMe**
 ENV PXC_ROOT_PASSWORD **ChangeMe**
-ENV SERVICE_NAME **ChangeMe**
+ENV SERVICE_NAME pxc
 
 ENV PXC_VOLUME /var/lib/mysql
 ENV PXC_CONF /etc/mysql/conf.d/pxc.cnf

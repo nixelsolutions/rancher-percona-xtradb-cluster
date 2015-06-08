@@ -22,9 +22,20 @@ fi
 # Configure the cluster (replace required parameters)
 sleep 5
 echo "=> Configuring PXC cluster"
-PXC_NODES=`dig +short $SERVICE_NAME`
-export PXC_NODES=`echo $PXC_NODES | sed "s/ /,/g"`
+PXC_NODES=`dig +short ${SERVICE_NAME}`
+export PXC_NODES=`echo ${PXC_NODES} | sed "s/ /,/g"`
+if [ -z "${PXC_NODES}" ]; then
+   echo "*** ERROR: Could not determine which containers are part of this service."
+   echo "*** Is this service named "${SERVICE_NAME}"? If not, please regenerate the service"
+   echo "*** and add SERVICE_NAME environment variable which value should be equal to this service name"
+   echo "*** Exiting ..."
+   exit 1
+fi
 export MY_RANCHER_IP=`ip addr | grep inet | grep 10.42 | tail -1 | awk '{print $2}' | awk -F\/ '{print $1}'`
+if [ -z "${MY_RANCHER_IP}" ]; then
+   echo "*** ERROR: Could not determine this container Rancher IP - Exiting ..."
+   exit 1
+fi
 change_pxc_nodes.sh "${PXC_NODES}"
 echo "root:${PXC_ROOT_PASSWORD}" | chpasswd
 perl -p -i -e "s/PXC_SST_PASSWORD/${PXC_SST_PASSWORD}/g" ${PXC_CONF}
