@@ -12,6 +12,7 @@ RUN apt-get update && \
     apt-get -y install percona-xtradb-cluster-56 pwgen supervisor openssh-server sshpass xinetd dnsutils
 
 RUN mkdir -p /var/log/supervisor /var/run/sshd
+RUN perl -p -i -e "s/^Port .*/Port ${SSH_PORT}/g" /etc/ssh/sshd_config
 RUN perl -p -i -e "s/#?PasswordAuthentication .*/PasswordAuthentication yes/g" /etc/ssh/sshd_config
 RUN perl -p -i -e "s/#?PermitRootLogin .*/PermitRootLogin yes/g" /etc/ssh/sshd_config
 RUN grep ClientAliveInterval /etc/ssh/sshd_config >/dev/null 2>&1 || echo "ClientAliveInterval 60" >> /etc/ssh/sshd_config
