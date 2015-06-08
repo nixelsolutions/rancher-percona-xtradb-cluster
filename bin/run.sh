@@ -26,7 +26,7 @@ PXC_NODES=`dig +short ${SERVICE_NAME}`
 export PXC_NODES=`echo ${PXC_NODES} | sed "s/ /,/g"`
 if [ -z "${PXC_NODES}" ]; then
    echo "*** ERROR: Could not determine which containers are part of this service."
-   echo "*** Is this service named "${SERVICE_NAME}"? If not, please regenerate the service"
+   echo "*** Is this service named \"${SERVICE_NAME}\"? If not, please regenerate the service"
    echo "*** and add SERVICE_NAME environment variable which value should be equal to this service name"
    echo "*** Exiting ..."
    exit 1
