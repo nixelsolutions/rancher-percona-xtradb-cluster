@@ -5,7 +5,7 @@ set -e
 [ "$DEBUG" == "1" ] && set -x && set +e
 
 echo "=> Notifying the cluster about myself"
-for node in `echo "${PXC_NODES}" | sed "s/,//g"`; do
+for node in `echo "${PXC_NODES}" | sed "s/,/ /g"`; do
    # Skip myself
    if [ "${MY_RANCHER_IP}" == "${node}" ]; then
       continue

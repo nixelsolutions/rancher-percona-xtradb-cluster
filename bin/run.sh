@@ -40,7 +40,7 @@ echo "==========================================="
 if [ ! -e ${PXC_CONF_FLAG} ]; then
    # Bootstrap the cluster - Needed for first container initialization
    # Only first server on PXC_NODES list is bootstraping the cluster
-   if [ "${MY_RANCHER_IP}" == `echo "${PXC_NODES}" | head -1` ]; then
+   if [ "${MY_RANCHER_IP}" == `echo "${PXC_NODES}" | awk -F, '{print $1}'` ]; then
       bootstrap-pxc.sh || exit 1
    # Don't bootstrap the cluster, just join it - Needed for subsequent containers initialization
    else 
