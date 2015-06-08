@@ -30,7 +30,7 @@ perl -p -i -e "s/MY_RANCHER_IP/${MY_RANCHER_IP}/g" ${PXC_CONF}
 chown -R mysql:mysql ${PXC_VOLUME}
 
 echo "==========================================="
-echo "When you need to use this database cluster in an application
+echo "When you need to use this database cluster in an application"
 echo "remember that your MySQL root password is ${PXC_ROOT_PASSWORD}"
 echo "===========================================" 
 
