@@ -23,7 +23,7 @@ ENV SERVICE_NAME **ChangeMe**
 ENV PXC_VOLUME /var/lib/mysql
 ENV PXC_CONF /etc/mysql/conf.d/pxc.cnf
 ENV PXC_CONF_FLAG /var/lib/mysql/pxc.configured
-ENV SSH_OPTS -p 2222 -o ConnectTimeout=4 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
+ENV SSH_OPTS -p 2222 -o ConnectTimeout=20 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
 
 ENV DEBUG 0
 

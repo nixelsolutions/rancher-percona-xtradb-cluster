@@ -19,7 +19,6 @@ echo "GRANT RELOAD, LOCK TABLES, REPLICATION CLIENT ON *.* TO 'sstuser'@'%';" >>
 echo "GRANT PROCESS ON *.* TO 'clustercheckuser'@'localhost' IDENTIFIED BY 'clustercheckpassword!';" >> /tmp/init.sql
 echo "FLUSH PRIVILEGES;" >> /tmp/init.sql
 touch ${PXC_CONF_FLAG}
-chmod 600 ${PXC_CONF_FLAG}
 
 echo "=> Starting PXC Cluster"
 /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord_bootstrap.conf

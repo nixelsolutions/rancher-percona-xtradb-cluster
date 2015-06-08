@@ -22,7 +22,8 @@ fi
 # Configure the cluster (replace required parameters)
 sleep 5
 echo "=> Configuring PXC cluster"
-export PXC_NODES=`dig +short $SERVICE_NAME | sed "s/ /,/g"`
+PXC_NODES=`dig +short $SERVICE_NAME`
+export PXC_NODES=`echo $PXC_NODES | sed "s/ /,/g"`
 export MY_RANCHER_IP=`ip addr | grep inet | grep 10.42 | tail -1 | awk '{print $2}' | awk -F\/ '{print $1}'`
 change_pxc_nodes.sh "${PXC_NODES}"
 echo "root:${PXC_ROOT_PASSWORD}" | chpasswd
