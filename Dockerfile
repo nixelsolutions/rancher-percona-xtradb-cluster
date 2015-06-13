@@ -20,6 +20,7 @@ ENV PXC_CONF /etc/mysql/conf.d/pxc.cnf
 ENV PXC_CONF_FLAG /var/lib/mysql/pxc.configured
 ENV SSH_USER root
 ENV SSH_PORT 2222
+ENV MYSQLCHK_PORT 9200
 ENV SSH_OPTS -p ${SSH_PORT} -o ConnectTimeout=20 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
 
 ENV DEBUG 0
@@ -33,7 +34,7 @@ RUN grep ClientAliveInterval /etc/ssh/sshd_config >/dev/null 2>&1 || echo "Clien
 VOLUME ["${PXC_VOLUME}"]
 
 RUN mkdir -p /usr/local/bin
-RUN echo "mysqlchk 9200/tcp #mysqlchk" >> /etc/services
+RUN echo "mysqlchk ${MYSQLCHK_PORT}/tcp #mysqlchk" >> /etc/services
 ADD ./bin /usr/local/bin
 RUN chmod +x /usr/local/bin/*.sh
 ADD ./etc/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
