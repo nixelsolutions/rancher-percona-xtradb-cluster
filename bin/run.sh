@@ -65,7 +65,7 @@ if [ ! -e ${PXC_CONF_FLAG} ]; then
       fi
    done
    
-   if [ ${BOOTSTRAPED} ]; then
+   if ${BOOTSTRAPED}; then
       echo "=> Seems like cluster has already been bootstraped, so I'm joining it ..."
       join-cluster.sh || exit 1
    else
