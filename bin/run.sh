@@ -59,6 +59,7 @@ if [ ! -e ${PXC_CONF_FLAG} ]; then
          continue
       fi
       # Check if node is already initializated - that means the cluster has already been bootstraped 
+      ping -c 10 ${node} 2>&1 >/dev/null
       if wget -O- -T 20 http://${node}:${MYSQLCHK_PORT} >/dev/null 2>&1; then
          BOOTSTRAPED=true
          break
