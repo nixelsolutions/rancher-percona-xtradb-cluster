@@ -17,7 +17,7 @@ ENV SERVICE_NAME pxc
 
 ENV PXC_VOLUME /var/lib/mysql
 ENV PXC_CONF /etc/mysql/conf.d/pxc.cnf
-ENV PXC_CONF_FLAG /var/lib/mysql/pxc.configured
+ENV PXC_CONF_FLAG /etc/mysql/pxc.configured
 ENV SSH_USER root
 ENV SSH_PORT 2222
 ENV MYSQLCHK_PORT 9200
