@@ -20,5 +20,15 @@ echo "GRANT PROCESS ON *.* TO 'clustercheckuser'@'localhost' IDENTIFIED BY 'clus
 echo "FLUSH PRIVILEGES;" >> /tmp/init.sql
 touch ${PXC_CONF_FLAG}
 
+# Import an init SQL
+if [ "${PXC_INIT_SQL}" != "**ChangeMe**" -a ! -z "${PXC_INIT_SQL}" ]; then
+   # Save the SQL temporary
+   wget -O /tmp/init_exteranl.sql "${PXC_INIT_SQL}" 
+   if [ $? -eq 0 ]; then
+      echo "=> I'm importing this SQL file when bootstraping: ${PXC_INIT_SQL}"
+      cat /tmp/init_exteranl.sql >> /tmp/init.sql
+   fi
+fi   
+
 echo "=> Starting PXC Cluster"
 /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord_bootstrap.conf
