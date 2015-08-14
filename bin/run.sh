@@ -59,7 +59,7 @@ if [ ! -e ${PXC_CONF_FLAG} ]; then
          continue
       fi
       # Check if node is already initializated - that means the cluster has already been bootstraped 
-      if sshpass -p ${PXC_ROOT_PASSWORD} ssh ${SSH_OPTS} ${SSH_USER}@${node} "[ -e ${PXC_CONF_FLAG} ]" >/dev/null 2>&1; then
+      if sshpass -p ${PXC_ROOT_PASSWORD} ssh ${SSH_OPTS} ${SSH_USER}@${node} "[ -e ${PXC_BOOTSTRAP_FLAG} ]" >/dev/null 2>&1; then
          BOOTSTRAPED=true
          break
       fi
