@@ -22,7 +22,7 @@ fi
 # Configure the cluster (replace required parameters)
 sleep 5
 echo "=> Configuring PXC cluster"
-PXC_NODES=`dig +short ${SERVICE_NAME}`
+PXC_NODES=`dig +short ${SERVICE_NAME} | sort`
 export PXC_NODES=`echo ${PXC_NODES} | sed "s/ /,/g"`
 if [ -z "${PXC_NODES}" ]; then
    echo "*** ERROR: Could not determine which containers are part of this service."
